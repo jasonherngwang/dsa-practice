@@ -4,7 +4,7 @@ https://leetcode.com/problems/longest-consecutive-sequence/
 
 Problem
 ------------------------------------------
-Given an unsorted array of integers nums, return the length of the longest 
+Given an unsorted array of integers nums, return the length of the longest
 consecutive elements sequence.
 
 You must write an algorithm that runs in O(n) time.
@@ -70,24 +70,24 @@ Steps
 
 'use strict';
 
-const longestConsecutive = function(nums) {
+const longestConsecutive = function (nums) {
   if (nums.length === 0) return 0;
-  
+
   let set = new Set(nums);
   let longestSeq = 0;
-  
+
   for (let num of nums) {
     if (!set.has(num - 1)) {
       let nextNum = num + 1;
       while (set.has(nextNum)) {
         nextNum += 1;
       }
-      longestSeq = Math.max(longestSeq, nextNum - num); 
+      longestSeq = Math.max(longestSeq, nextNum - num);
     }
   }
-  
-  return longestSeq;
-}
 
-console.log(longestConsecutive([100,4,200,1,3,2])); // 4
-console.log(longestConsecutive([0,3,7,2,5,8,4,6,0,1])); // 9
+  return longestSeq;
+};
+
+console.log(longestConsecutive([100, 4, 200, 1, 3, 2])); // 4
+console.log(longestConsecutive([0, 3, 7, 2, 5, 8, 4, 6, 0, 1])); // 9
