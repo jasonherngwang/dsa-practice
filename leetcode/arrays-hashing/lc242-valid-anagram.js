@@ -55,12 +55,15 @@ Guard clause: If lengths are not equal, return false.
 
 Approach 1: Keeping track of letter counts
 Time: O(M + N). Single traversal of `s` and `t`.
-Space: O(M). Only storing chars of `s` in the object.
+Space: O(1). If `s` has duplicates, hash size will not scale with it.
+
+Steps
 - Iterate through chars of `s`, tracking character count in an object.
 - Iterate through chars of `t`:
   - Access property using char as key.
     - If undefined, this char does not exists in `s`. Return false.
-      - WARNING: Number 0 is falsey. Explicity check for undefined.
+      - WARNING: Number 0 is falsey. Explicity check for undefined. Not a big
+        deals since counts will always be >= 1 in the freq map.
     - If not undefined:
       - If current count is 1, delete the property.
       - If current count > 1, decrement it by 1.
@@ -76,6 +79,10 @@ Space: O(M + N). Two new arrays with lengths M and N, respectively.
 - Check if equal.
 
 Approach 3: Counting characters. For 26 letter alphabet only.
+Time: O(N + M)
+Space: O(1)
+
+Steps
 - Create an alphabet array of size 26, with all initialized to 0.
 - Iterate over the chars in `s`.
   - Find the character code, e.g 98 for 'b'.
