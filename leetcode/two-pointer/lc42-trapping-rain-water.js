@@ -36,7 +36,19 @@ Arrays
 
 Algorithm
 ------------------------------------------
+Brute Force
+Time: O(N^2)
+- Iterate over every index.
+  - Iterate, starting from the index, outward to both end, tracking the max
+    height on each side.
+  - The minimum of these two maximums, minus the height at the index, is the
+    amount of water that can be held there.
+- Sum the amounts.
+
 Approach 1: Precomputation, DP
+Pre-compute the max height seen to the left and the right, in 2 passes. Then
+take the minimum
+
 Time: O(N)
 - 1 traversal LtR, 1 traversal RtL, 1 traversal comparing the 2 arrays.
 Space: O(N) for 2 arrays
@@ -53,10 +65,29 @@ Steps
 - Sum the units.
 
 Approach 2: 2 Pointer
+Similar to Precomutation approach, but calculate max height as we go, instead
+of building arrays.
 Time: O(N)
 Space: O(1)
 
-Iterate from both sides to middle
+- Initialize result variable to sum up all water stored.
+- Initialize maxLeft, maxRight to track the max heights even seen TO THE left
+  and right of our pointers
+- Initialize left, right to track the heights AT THE current location of our
+  pointers.
+  - Initialize left to index 1, and right to length - 2. No need to include the
+    edges.
+- While the two pointers have not crossed-over each other (left <= right):
+  - If maxLeft < maxRight, water will "spill over" the left side. I.e. the left
+    side determines the final water level.
+    - If left > maxLeft, we can't store water since it will spill to the left.
+      Update maxLeft with the value of left.
+    - If left <= maxLeft, the left wall could trap some water here. The amount
+      is maxLeft - height(left). This could be 0 if left === maxLeft.
+      Add this to the result variable.
+    - Increment left pointer by 1.
+  - If maxLeft > maxRight, water will "spill" over the right side. Repeat the
+    steps for the right side.
 
 */
 
@@ -90,3 +121,36 @@ function trap(height) {
 
 console.log(trap([4, 2, 0, 3, 2, 5])); // 9
 console.log(trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])); // 6
+
+function trap2(height) {
+  if (height.length <= 2) return 0;
+
+  let waterTrapped = 0;
+  let maxLeft = height[0];
+  let maxRight = height[height.length - 1];
+  let left = 1;
+  let right = height.length - 2;
+
+  while (left <= right) {
+    if (maxLeft < maxRight) {
+      if (height[left] > maxLeft) {
+        maxLeft = height[left];
+      } else {
+        waterTrapped += maxLeft - height[left];
+      }
+      left += 1;
+    } else {
+      if (height[right] > maxRight) {
+        maxRight = height[right];
+      } else {
+        waterTrapped += maxRight - height[right];
+      }
+      right -= 1;
+    }
+  }
+
+  return waterTrapped;
+}
+
+console.log(trap2([4, 2, 0, 3, 2, 5])); // 9
+console.log(trap2([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])); // 6
