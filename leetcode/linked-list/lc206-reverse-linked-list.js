@@ -1,15 +1,7 @@
 /*
-Definition for singly-linked list.
-function ListNode(val, next) {
-    this.val = (val===undefined ? 0 : val)
-    this.next = (next===undefined ? null : next)
-}
+Reverse Linked List
+https://leetcode.com/problems/reverse-linked-list/
 
-@param {ListNode} head
-@return {ListNode}
-*/
-
-/*
 Problem
 ------------------------------------------
 Given the head of a singly linked list, reverse the list, and return the

@@ -4,13 +4,13 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
 Problem
 ------------------------------------------
-You are given an array prices where prices[i] is the price of a given stock on 
+You are given an array prices where prices[i] is the price of a given stock on
 the ith day.
 
-You want to maximize your profit by choosing a single day to buy one stock and 
+You want to maximize your profit by choosing a single day to buy one stock and
 choosing a different day in the future to sell that stock.
 
-Return the maximum profit you can achieve from this transaction. If you cannot 
+Return the maximum profit you can achieve from this transaction. If you cannot
 achieve any profit, return 0.
 
 Inputs: 1 array of non-negative integers, the stock prices on different days,
@@ -57,24 +57,20 @@ Time: O(N) for 1 traversal
 Space: O(1) for a few variables
 
 Steps
-- Initialize two pointers, `buy` and `sell` to index 0.
-- Initialize variable `maxProfit` to 0.
-- Initialize variable `minPrice` to first element
+- Initialize variables to track min price (Inf) and max profit (0).
 - Iterate over array.
-  - If price < minPrice, set buy to current price
-  - If profit (sell - buy) > maxProfit
-    - Move sell pointer to current price
-    - Update maxProfit if it is higher.
+  - If price < min price, update min price
+  - If profit (sell - buy) > max profit, update max profit
 */
 
 'use strict';
 
 function maxProfit(prices) {
   if (prices.length <= 1) return 0;
-  
+
   let minPrice = Infinity;
   let maxProfit = 0;
-  
+
   for (let i = 0; i < prices.length; i += 1) {
     if (prices[i] < minPrice) {
       minPrice = prices[i];
@@ -82,12 +78,12 @@ function maxProfit(prices) {
       maxProfit = Math.max(maxProfit, prices[i] - minPrice);
     }
   }
-  
+
   return maxProfit;
 }
 
-console.log(maxProfit([1,2,3,4,5])); // 4
-console.log(maxProfit([7,1,5,3,6,4])); // 5
-console.log(maxProfit([7,6,4,3,1])); // 0
+console.log(maxProfit([1, 2, 3, 4, 5])); // 4
+console.log(maxProfit([7, 1, 5, 3, 6, 4])); // 5
+console.log(maxProfit([7, 6, 4, 3, 1])); // 0
 console.log(maxProfit([7])); // 0
 console.log(maxProfit([])); // 0
