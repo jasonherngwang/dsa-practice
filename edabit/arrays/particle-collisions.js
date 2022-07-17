@@ -66,19 +66,20 @@ movingParticles([5, -1, -2, -9]) ➞ [-17]
 
 Data Structure
 ------------------------------------------
-Arrays
+Arrays for iteration
 
 Algorithm
 ------------------------------------------
+// Approach 1
 Repeatedly iterate through the array, performing one operation on each pass.
 If no operations were performed, the array is at equilibrium.
 
 Helper function: Merge 2 particles
 Inputs: pos, neg (integers)
 - If pos >= -(neg), return pos - neg
-- Else, return -pos - neg
+- Else, return neg - pos
 
-Guard clause
+Guard clause (not necessary)
 - If array length <= 1 return itself.
 
 Steps
@@ -90,7 +91,7 @@ Steps
       elements with the single return value of calling the helper function.
       - slice() could be useful.
       - Set flag to true.
-  - If flag is false, no merges were made. Exit loop
+  - If flag is false, no merges were made. Exit loop.
 - Return result array.
 */
 
@@ -99,10 +100,6 @@ Steps
 function mergeParticles(pos, neg) {
   return pos >= -neg ? pos - neg : neg - pos;
 }
-
-// console.log(mergeParticles(2, -1)); // 3
-// console.log(mergeParticles(1, -1)); // 2
-// console.log(mergeParticles(1, -2)); // -3
 
 function movingParticles(arr) {
   let particles = arr.slice();
@@ -130,3 +127,4 @@ console.log(movingParticles([5, -1, 2, -9])); // [-17]
 console.log(movingParticles([-1, -2, -3, 3, 2, 1])); // [-1, -2, -3, 3, 2, 1]
 console.log(movingParticles([1, 2, 3, -3, -2, -1])); // [1, 2, 9]
 console.log(movingParticles([1, 1, 1, -1, -5, 1])); // [-9, 1]
+console.log(movingParticles([1, 1, 0, 1, -1, -5, 1])); // [1, 1, 0, -7, 1]

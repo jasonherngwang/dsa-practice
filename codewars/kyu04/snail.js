@@ -54,7 +54,7 @@ Algorithm
     array.
       - Check for empty array, since while condition only checks at start of
         loop.
-  - Extract first col by iterationg from `arr` length - 1 down to 0. Shift and
+  - Extract first col by iterating from `arr` length - 1 down to 0. Shift and
     push.
 
 */
