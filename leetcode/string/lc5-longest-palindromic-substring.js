@@ -63,6 +63,8 @@ Mirror across 2 chars
 - Return max length
 
 Helper function: Expand around center
+We expand outward until we hit either end of the string, or the substring is no
+longer a mirrored palindrome.
 Arguments: string, left, right
 - While left >= 0 and right <= string length - 1:
   - While left char === right char:
